@@ -142,6 +142,7 @@ border: none;
 padding: 10px 15px;
 border-radius: 8px;
 cursor: pointer;
+font-size: 18px;
 }
 
 /* Responsive adjustments */
@@ -153,7 +154,7 @@ cursor: pointer;
 
 </head>
 <body data-theme="light"><header>
-  <button class="dark-toggle" id="darkToggle">🌙 Dark Mode</button>
+  <button class="dark-toggle" id="darkToggle">🌙</button>
   <div class="logo-container">
     <img src="AI-S.jpg" alt="Brand Personality Logo" id="logoImg" />
     <div class="logo-text">
@@ -260,10 +261,10 @@ cursor: pointer;
     const body = document.body;
     if(body.getAttribute('data-theme') === 'light'){
       body.setAttribute('data-theme','dark');
-      darkToggle.textContent = '☀️ Light Mode';
+      darkToggle.textContent = '☀️';
     } else {
       body.setAttribute('data-theme','light');
-      darkToggle.textContent = '🌙 Dark Mode';
+      darkToggle.textContent = '🌙';
     }
   });
 
@@ -282,4 +283,4 @@ cursor: pointer;
     e.target.reset();
   });
 </script></body>
-  </html>
+            </html>
