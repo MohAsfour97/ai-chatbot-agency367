@@ -1,75 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Asfour's AI Chatbot Agency</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background:#f4f4f4; }
-    header { background: #111; color: #fff; padding: 40px; text-align: center; }
-    h1 { margin: 0; font-size: 42px; }
-    .section { padding: 50px 20px; text-align: center; }
-    .btn { background:#007bff; color:white; padding:15px 30px; text-decoration:none; border-radius:8px; font-size:18px; }
-    .pricing { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
-    .card { background:white; padding:25px; border-radius:12px; width:280px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
-    .chatbox { width:100%; max-width:400px; margin:40px auto; background:white; border-radius:12px; padding:20px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
-    #messages { height:200px; overflow-y:auto; text-align:left; padding:10px; border:1px solid #ccc; border-radius:8px; margin-bottom:10px; }
-    input { width:100%; padding:10px; border-radius:8px; border:1px solid #999; }
-    footer { text-align:center; padding:20px; color:#666; }
-    .logo { display:flex; gap:10px; align-items:center; justify-content:center; margin-bottom:10px; }
-    .logo img { width:48px; height:48px; border-radius:8px; }
+    body { font-family: Arial, sans-serif; margin: 0; background:#f4f4f4; }/* Header / Hero */
+header {
+  background: #111;
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.logo-container img {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.logo-text h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+.logo-text p {
+  margin: 5px 0 0;
+  font-size: 18px;
+  color: #ddd;
+}
+
+.btn {
+  display: inline-block;
+  background: #007bff;
+  color: white;
+  padding: 15px 30px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 18px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover { background: #0056b3; }
+
+/* Section styling */
+.section { padding: 50px 20px; text-align: center; }
+.pricing { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
+.card { background:white; padding:25px; border-radius:12px; width:280px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+
+/* Chatbox */
+.chatbox { width:100%; max-width:400px; margin:40px auto; background:white; border-radius:12px; padding:20px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+#messages { height:200px; overflow-y:auto; text-align:left; padding:10px; border:1px solid #ccc; border-radius:8px; margin-bottom:10px; }
+input { width:100%; padding:10px; border-radius:8px; border:1px solid #999; }
+
+/* Footer */
+footer { text-align:center; padding:20px; color:#666; }
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .logo-container { flex-direction: row; align-items: center; text-align: left; }
+  .logo-text { margin-left: 20px; }
+}
+
   </style>
 </head>
-<body>
-
-<header>
-  <div class="logo">
+<body><header>
+  <div class="logo-container">
     <img src="AI-S.jpg" alt="Brand Personality Logo" id="logoImg" />
+    <div class="logo-text">
       <h1 id="agencyName">Asfour's AI Chatbot Agency</h1>
       <p id="tagline">Automate your business with 24/7 AI customer support</p>
     </div>
   </div>
   <a href="#get-started" class="btn">Get Started</a>
-</header>
-
-<section class="section" id="demo">
+</header><section class="section" id="demo">
   <h2>Try Our Demo Chatbot</h2>
   <div class="chatbox" role="region" aria-label="Demo chatbot">
     <div id="messages" aria-live="polite"></div>
     <input id="userInput" placeholder="Type your message..." onkeypress="handleKey(event)" />
   </div>
   <p style="max-width:700px; margin:0 auto;">This demo uses a canned response. When connected to an AI backend (GPT/LLM or Bot platform), it will return live answers from your knowledge base.</p>
-</section>
-
-<script>
-  function addMessage(sender, text) {
-    const box = document.getElementById('messages');
-    const div = document.createElement('div');
-    div.style.margin = '6px 0';
-    div.innerHTML = '<b>' + sender + ':</b> ' + text;
-    box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
-  }
-
-  function handleKey(e) {
-    if (e.key === 'Enter') {
-      const input = document.getElementById('userInput');
-      const text = input.value.trim();
-      if (!text) return;
-      addMessage('You', text);
-      input.value = '';
-      // demo response
-      setTimeout(() => {
-        addMessage('Bot', 'Thanks for trying the demo — we can connect a real AI to answer using your site content, FAQs, and product info.');
-      }, 600);
-    }
-  }
-
-  // small bootstrap message
-  addMessage('Bot', 'Hello! Try asking about our packages or say \"How can you help my business?\"');
-</script>
-
-<section class="section" id="pricing">
+</section><section class="section" id="pricing">
   <h2>Pricing</h2>
   <div class="pricing" role="list">
     <div class="card" role="listitem">
@@ -88,27 +108,42 @@
       <p>Multilingual, CRM integration, priority support</p>
     </div>
   </div>
-</section>
-
-<section class="section" id="get-started">
+</section><section class="section" id="get-started">
   <h2>Get Started</h2>
   <p>Click the button below to begin onboarding. You will be asked to provide your website link, FAQs, and make payment to activate your chatbot.</p>
   <a href="#" class="btn" id="startBtn">Start Now</a>
-</section>
-
-<footer>
+</section><footer>
   <p>© <span id="year"></span> Bulbul AI Chatbot Agency — Built by Bulbul</p>
-</footer>
+</footer><script>
+  function addMessage(sender, text) {
+    const box = document.getElementById('messages');
+    const div = document.createElement('div');
+    div.style.margin = '6px 0';
+    div.innerHTML = '<b>' + sender + ':</b> ' + text;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  }
 
-<script>
-  // small script to set year and allow Start Now to open a simple onboarding modal (demo)
+  function handleKey(e) {
+    if (e.key === 'Enter') {
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
+      addMessage('You', text);
+      input.value = '';
+      setTimeout(() => {
+        addMessage('Bot', 'Thanks for trying the demo — we can connect a real AI to answer using your site content, FAQs, and product info.');
+      }, 600);
+    }
+  }
+
+  addMessage('Bot', 'Hello! Try asking about our packages or say "How can you help my business?"');
+
   document.getElementById('year').textContent = new Date().getFullYear();
   document.getElementById('startBtn').addEventListener('click', function(e){
     e.preventDefault();
     const url = 'https://forms.gle/'; // placeholder - replace with your Tally/Typeform link
     window.open(url, '_blank');
   });
-</script>
-
-</body>
+</script></body>
 </html>
