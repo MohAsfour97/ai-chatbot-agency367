@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulbul AI Agency</title>
+  <style>
+    :root {
+      --primary: #4e8cff;
+      --bg: #0f0f0f;
+      --card: #1a1a1a;
+      --text: #eaeaea;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      text-align:center;
+      padding:120px 20px;
+      background:linear-gradient(135deg, #141414, #1f1f1f);
+    }
+    h1 { font-size:50px; font-weight:800; margin-bottom:10px; }
+    p { opacity:0.9; font-size:18px; }
+    .btn {
+      display:inline-block;
+      margin-top:30px;
+      padding:15px 40px;
+      background:var(--primary);
+      border-radius:50px;
+      text-decoration:none;
+      color:white;
+      font-size:18px;
+      transition:0.3s;
+    }
+    .btn:hover { opacity:0.8; }
+
+    /* Sections */
+    .section { padding:80px 20px; text-align:center; max-width:1200px; margin:auto; }
+    .pricing-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:30px;
+      margin-top:40px;
+    }
+    .card {
+      background:var(--card);
+      padding:30px;
+      border-radius:20px;
+      box-shadow:0 0 20px rgba(0,0,0,0.3);
+      transition:0.3s;
+      border:1px solid #222;
+    }
+    .card:hover {
+      transform:translateY(-10px);
+      border-color:var(--primary);
+    }
+    .card h3 { font-size:26px; margin-bottom:10px; }
+    .card p { margin:8px 0; opacity:0.85; }
+
+    /* Chatbox */
+    .chatbox {
+      max-width:450px;
+      margin:40px auto;
+      background:var(--card);
+      border:1px solid #333;
+      border-radius:20px;
+      padding:20px;
+      box-shadow:0 0 20px rgba(0,0,0,0.4);
+    }
+    #messages {
+      height:250px;
+      overflow-y:auto;
+      padding:15px;
+      background:#111;
+      border-radius:15px;
+      border:1px solid #333;
+      margin-bottom:15px;
+      font-size:15px;
+    }
+    #userInput {
+      width:100%;
+      padding:15px;
+      border-radius:12px;
+      border:1px solid #444;
+      background:#0d0d0d;
+      color:white;
+    }
+
+    footer {
+      text-align:center;
+      padding:20px;
+      font-size:15px;
+      opacity:0.6;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Bulbul AI Chatbot Agency</h1>
+  <p>Modern AI Agents — 24/7 Support • Automated Sales • Smart Assistants</p>
+  <a href="#get-started" class="btn">Get Started</a>
+</header>
+
+<section class="section" id="demo">
+  <h2 style="font-size:36px; margin-bottom:15px;">Try Our Demo Chatbot</h2>
+  <p>Experience how your customers will interact with your AI assistant.</p>
+  <div class="chatbox">
+    <div id="messages"></div>
+    <input id="userInput" placeholder="Ask something..." onkeypress="handleKey(event)">
+  </div>
+</section>
+
+<script>
+  function addMessage(sender, text) {
+    const box = document.getElementById('messages');
+    const div = document.createElement('div');
+    div.style.margin = '10px 0';
+    div.innerHTML = '<b>' + sender + ':</b> ' + text;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function handleKey(e) {
+    if (e.key === 'Enter') {
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
+      addMessage('You', text);
+      input.value = '';
+      setTimeout(() => {
+        addMessage('Bot', 'Our upgraded AI chatbot will use your business documents and website to answer intelligently.');
+      }, 600);
+    }
+  }
+
+  addMessage('Bot', 'Hello! Type a message to try the demo.');
+</script>
+
+<section class="section" id="pricing">
+  <h2 style="font-size:36px;">Pricing Plans</h2>
+  <div class="pricing-grid">
+    <div class="card">
+      <h3>Basic</h3>
+      <p>300 SAR / month</p>
+      <p>Single chatbot</p>
+      <p>Basic support</p>
+      <p>10K messages</p>
+    </div>
+    <div class="card">
+      <h3>Business</h3>
+      <p>600 SAR / month</p>
+      <p>Document training</p>
+      <p>Analytics dashboard</p>
+      <p>Priority support</p>
+    </div>
+    <div class="card">
+      <h3>Premium</h3>
+      <p>1200 SAR / month</p>
+      <p>Multi‑language</p>
+      <p>CRM integration</p>
+      <p>AI personal agent</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="get-started">
+  <h2 style="font-size:36px;">Get Started</h2>
+  <p>Launch your AI chatbot in under 24 hours.</p>
+  <a href="#" class="btn">Start Onboarding</a>
+</section>
+
+<footer>
+  © 2025 Bulbul AI Agency — All Rights Reserved
+</footer>
+
+</body>
+</html>
