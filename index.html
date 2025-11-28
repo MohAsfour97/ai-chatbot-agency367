@@ -1,316 +1,282 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>QOUTANICAL AI Chatbot</title>
+<title>Asfour AI Agency</title>
+
 <style>
-:root {
-  --bg-color: #e6e0f0;
-  --text-color: #111;
-  --header-bg: #1A183F;
-  --header-text: #fff;
-  --btn-bg: #8A2BE2;
-  --btn-hover: #7a1fcf;
-  --card-bg: #fff;
-  --chat-bg: #fff;
-  --chat-border: #ccc;
-  --user-msg-bg: #8A2BE2;
-  --bot-msg-bg: #f1f0f5;
-  --user-msg-text: #fff;
-  --bot-msg-text: #111;
-  --typing-color: #888;
-}[data-theme="dark"] {
---bg-color: #0d0c21;
---text-color: #f4f4f4;
---header-bg: #1A183F;
---header-text: #fff;
---btn-bg: #8A2BE2;
---btn-hover: #5c0f9c;
---card-bg: #1A183F;
---chat-bg: #1A183F;
---chat-border: #444;
---user-msg-bg: #8A2BE2;
---bot-msg-bg: #222;
---user-msg-text: #fff;
---bot-msg-text: #eee;
---typing-color: #aaa;
-}
+  :root {
+    --bg: #f4f4f4;
+    --text: #111;
+    --card: #fff;
+    --primary: #007bff;
+    --shadow: rgba(0,0,0,0.1);
+  }
+  body.dark {
+    --bg: #0f0f0f;
+    --text: #eee;
+    --card: #1a1a1a;
+    --primary: #4da3ff;
+    --shadow: rgba(255,255,255,0.1);
+  }
 
-body {
-font-family: Arial, sans-serif;
-margin: 0;
-background: var(--bg-color);
-color: var(--text-color);
-transition: background 0.3s, color 0.3s;
-}
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+  }
 
-/* Header */
-header {
-background: var(--header-bg);
-color: var(--header-text);
-padding: 60px 20px;
-text-align: center;
-position: relative;
-}
+  /* Header */
+  header {
+    background: #111;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+  }
 
-.logo-container {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 15px;
-margin-bottom: 25px;
-}
+  /* Dark mode button (sun/moon icons ONLY) */
+  #modeToggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 26px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
 
-.logo-container img {
-width: 80px;
-height: 80px;
-border-radius: 12px;
-object-fit: cover;
-}
+  /* Logo container */
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  .logo-container img {
+    width: 90px;
+    height: 90px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px var(--shadow);
+  }
 
-.logo-text h1 { margin: 0; font-size: 36px; }
-.logo-text p { margin: 5px 0 0; font-size: 18px; color: #ddd; }
+  .logo-text h1 { margin: 0; font-size: 34px; }
+  .logo-text p { margin: 0; color: #ccc; }
 
-.btn {
-display: inline-block;
-background: var(--btn-bg);
-color: white;
-padding: 15px 30px;
-text-decoration: none;
-border-radius: 8px;
-font-size: 18px;
-transition: background 0.3s ease;
-}
-.btn:hover { background: var(--btn-hover); }
+  /* Main CTA button */
+  .btn {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 15px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-top: 20px;
+    font-size: 18px;
+    transition: 0.3s;
+  }
+  .btn:hover { opacity: 0.8; }
 
-/* Section styling */
-.section { padding: 50px 20px; text-align: center; }
-.pricing { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
-.card { background: var(--card-bg); padding:25px; border-radius:12px; width:280px; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
-.card:hover { transform: translateY(-10px); }
+  /* Sections */
+  .section { padding: 60px 20px; text-align: center; }
 
-/* Chatbox ChatGPT style */
-.chatbox {
-width: 100%;
-max-width: 500px;
-margin: 40px auto;
-background: var(--chat-bg);
-border-radius: 15px;
-display: flex;
-flex-direction: column;
-box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-overflow: hidden;
-}
+  /* Pricing cards */
+  .pricing {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .card {
+    background: var(--card);
+    width: 280px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow);
+    transition: 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 14px var(--shadow);
+  }
 
-#messages {
-flex: 1;
-padding: 15px;
-height: 400px;
-overflow-y: auto;
-display: flex;
-flex-direction: column;
-gap: 10px;
-}
+  /* Chatbox */
+  .chatbox {
+    max-width: 420px;
+    width: 100%;
+    margin: 40px auto;
+    background: var(--card);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow);
+    animation: fadeIn 0.5s ease;
+  }
 
-.message {
-max-width: 75%;
-padding: 12px 15px;
-border-radius: 20px;
-line-height: 1.4;
-word-wrap: break-word;
-opacity: 0;
-animation: fadeIn 0.3s forwards;
-}
+  #messages {
+    height: 230px;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #5553;
+    margin-bottom: 12px;
+    background: var(--bg);
+  }
 
-.message.user {
-align-self: flex-end;
-background: var(--user-msg-bg);
-color: var(--user-msg-text);
-border-bottom-right-radius: 4px;
-}
+  .bubble {
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin: 6px 0;
+    max-width: 80%;
+    animation: fadeIn 0.4s ease;
+  }
 
-.message.bot {
-align-self: flex-start;
-background: var(--bot-msg-bg);
-color: var(--bot-msg-text);
-border-bottom-left-radius: 4px;
-}
+  .bot {
+    background: var(--primary);
+    color: white;
+    align-self: flex-start;
+  }
+  .user {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid #aaa3;
+    align-self: flex-end;
+    margin-left: auto;
+  }
 
-.message.typing::after {
-content: '...';
-display: inline-block;
-animation: blink 1s infinite;
-color: var(--typing-color);
-}
+  #userInput {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #888;
+    background: var(--bg);
+    color: var(--text);
+  }
 
-@keyframes blink {
-0%, 50%, 100% { opacity: 1; }
-25%, 75% { opacity: 0; }
-}
+  /* Animation */
+  @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 
-@keyframes fadeIn {
-to { opacity: 1; }
-}
+  /* Footer */
+  footer {
+    padding: 25px;
+    text-align: center;
+    color: var(--text);
+    opacity: 0.8;
+  }
 
-#input-container {
-display: flex;
-border-top: 1px solid var(--chat-border);
-}
-
-#userInput {
-flex: 1;
-padding: 12px 15px;
-border: none;
-outline: none;
-font-size: 16px;
-background: transparent;
-color: var(--text-color);
-}
-
-#sendBtn {
-background: var(--btn-bg);
-border: none;
-color: white;
-padding: 0 20px;
-cursor: pointer;
-font-size: 18px;
-transition: background 0.3s;
-}
-#sendBtn:hover { background: var(--btn-hover); }
-
-/* Footer & Dark Toggle */
-footer { text-align:center; padding:20px; color:#666; }
-.dark-toggle {
-position: absolute;
-top: 20px;
-right: 20px;
-background: var(--btn-bg);
-color: white;
-border: none;
-padding: 10px 15px;
-border-radius: 8px;
-cursor: pointer;
-font-size: 18px;
-}
-
-@media (min-width: 768px) {
-.logo-container { flex-direction: row; align-items: center; text-align: left; }
-.logo-text { margin-left: 20px; }
-}
+  @media (min-width: 768px) {
+    .logo-container { flex-direction: row; }
+  }
 </style>
-
 </head>
-<body data-theme="light">
+
+<body>
+
 <header>
-  <button class="dark-toggle" id="darkToggle">🌙</button>
+  <div id="modeToggle">🌙</div>
+
   <div class="logo-container">
-    <img src="AI-S.png" alt="Brand Logo" />
+    <img src="AI-S.jpg" alt="AI Logo">
     <div class="logo-text">
-      <h1>QOUTANICAL AI</h1>
-      <p>Our AI Solutions, built your way. Tailored AI chatbots for your business.</p>
+      <h1>Asfour's AI Agency</h1>
+      <p>Your Personal AI Support System</p>
     </div>
   </div>
-  <a href="#get-started" class="btn">Get Started</a>
-</header><section class="section" id="demo">
-  <h2>Try Our AI Chatbot</h2>
+
+  <a href="#demo" class="btn">Try Demo</a>
+</header>
+
+<!-- CHATBOT SECTION -->
+<section class="section" id="demo">
+  <h2>Live AI Chat Demo</h2>
+
   <div class="chatbox">
     <div id="messages"></div>
-    <div id="input-container">
-      <input id="userInput" placeholder="Type your message..." />
-      <button id="sendBtn">➡️</button>
-    </div>
+    <input id="userInput" placeholder="Ask something..." onkeypress="handleKey(event)">
   </div>
-  <p style="max-width:700px;margin:0 auto;">Powered by OpenAI. Your AI assistant can answer questions about your business, services, and FAQs.</p>
-</section><!-- Pricing, Contact, Dashboard, Get Started sections (unchanged) --><section class="section" id="pricing">
+
+  <p>The chatbot answers like a real AI agent and can be connected to OpenAI instantly.</p>
+</section>
+
+<!-- Pricing -->
+<section class="section" id="pricing">
   <h2>Pricing</h2>
   <div class="pricing">
-    <div class="card"><h3>Basic</h3><p><strong>300 SAR / month</strong></p><p>1 chatbot, basic support, 10k messages</p></div>
-    <div class="card"><h3>Business</h3><p><strong>600 SAR / month</strong></p><p>Document training, analytics dashboard, website install</p></div>
-    <div class="card"><h3>Premium</h3><p><strong>1200 SAR / month</strong></p><p>Multilingual, CRM integration, priority support</p></div>
+    <div class="card">
+      <h3>Basic</h3>
+      <p><strong>300 SAR / month</strong></p>
+      <p>1 AI chatbot, 10k messages, email support</p>
+    </div>
+
+    <div class="card">
+      <h3>Business</h3>
+      <p><strong>600 SAR / month</strong></p>
+      <p>Document training, analytics dashboard, custom integration</p>
+    </div>
+
+    <div class="card">
+      <h3>Premium</h3>
+      <p><strong>1200 SAR / month</strong></p>
+      <p>Multi-language, CRM integration, priority support</p>
+    </div>
   </div>
-</section><section class="section" id="contact">
+</section>
+
+<!-- Contact -->
+<section class="section" id="contact">
   <h2>Contact Us</h2>
-  <form id="contactForm" style="max-width:400px;margin:0 auto;text-align:left;">
-    <input type="text" name="name" placeholder="Name" required style="width:100%;padding:10px;margin:5px 0;border-radius:8px;">
-    <input type="email" name="email" placeholder="Email" required style="width:100%;padding:10px;margin:5px 0;border-radius:8px;">
-    <textarea name="message" placeholder="Message" required style="width:100%;padding:10px;margin:5px 0;border-radius:8px;"></textarea>
-    <button type="submit" class="btn">Send Message</button>
-  </form>
-</section><section class="section" id="dashboard">
-  <h2>Dashboard Preview</h2>
-  <div class="card">
-    <h3>Analytics Overview</h3>
-    <p>Total Users: 120</p>
-    <p>Messages Sent: 5,430</p>
-    <p>Active Chatbots: 3</p>
-  </div>
-</section><section class="section" id="get-started">
-  <h2>Get Started</h2>
-  <a href="#" class="btn" id="startBtn">Start Now</a>
-</section><footer>
-  <p>© <span id="year"></span> QOUTANICAL AI — Built by Bulbul</p>
-</footer><script>
-const messages = document.getElementById('messages');
-const input = document.getElementById('userInput');
-const sendBtn = document.getElementById('sendBtn');
+  <p>Email: support@asfourai.com</p>
+  <p>WhatsApp: +966 55 555 5555</p>
+</section>
 
-function addMessage(sender, text, typing=false){
-  const div = document.createElement('div');
-  div.className = 'message ' + sender + (typing?' typing':'');
-  div.textContent = text;
-  messages.appendChild(div);
-  messages.scrollTop = messages.scrollHeight;
-  return div;
+<footer>
+  © <span id="year"></span> Asfour AI — Built by Bulbul
+</footer>
+
+<script>
+/* DARK / LIGHT MODE */
+const toggle = document.getElementById("modeToggle");
+
+toggle.onclick = () => {
+  document.body.classList.toggle("dark");
+  toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+};
+
+/* CHATBOT */
+function addBubble(text, sender) {
+  const box = document.getElementById("messages");
+  const bubble = document.createElement("div");
+  bubble.className = "bubble " + sender;
+  bubble.textContent = text;
+  box.appendChild(bubble);
+  box.scrollTop = box.scrollHeight;
 }
 
-async function sendMessageToAI(message){
-  const response = await fetch('https://api.openai.com/v1/chat/completions',{
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'Authorization':'Bearer YOUR_OPENAI_API_KEY'
-    },
-    body: JSON.stringify({
-      model: "gpt-3.5-turbo",
-      messages: [{role:"user", content: message}]
-    })
-  });
-  const data = await response.json();
-  return data.choices[0].message.content;
-}
+function handleKey(e) {
+  if (e.key === "Enter") {
+    const input = document.getElementById("userInput");
+    const text = input.value.trim();
+    if (!text) return;
 
-async function handleMessage(){
-  const text = input.value.trim();
-  if(!text) return;
-  addMessage('user', text);
-  input.value = '';
-  const typingDiv = addMessage('bot', 'Thinking...', true);
-  const aiResponse = await sendMessageToAI(text);
-  typingDiv.remove();
-  addMessage('bot', aiResponse);
-}
+    addBubble(text, "user");
+    input.value = "";
 
-// Send message on button click or enter
-sendBtn.addEventListener('click', handleMessage);
-input.addEventListener('keypress', (e)=>{ if(e.key==='Enter'){handleMessage();} });
-
-// Dark/light toggle
-document.getElementById('darkToggle').addEventListener('click', ()=>{
-  const body = document.body;
-  if(body.getAttribute('data-theme')==='light'){
-    body.setAttribute('data-theme','dark');
-    document.getElementById('darkToggle').textContent='☀️';
-  }else{
-    body.setAttribute('data-theme','light');
-    document.getElementById('darkToggle').textContent='🌙';
+    setTimeout(() => {
+      addBubble("I understand! I’ll assist you just like a real AI agent. Tell me more.", "bot");
+    }, 700);
   }
-});
+}
 
-// Default welcome message
-addMessage('bot', 'Hello! I am your Personal AI Agent. How can I help you today?');
+/* Default GPT-style welcome */
+setTimeout(() => {
+  addBubble("👋 Hello! I’m your Personal AI Agent. How can I help you today?", "bot");
+}, 400);
 
-document.getElementById('year').textContent = new Date().getFullYear();
-document.getElementById('startBtn').addEventListener('click', ()=>window.open('https://forms.gle/', '_blank'));
-document.getElementById('contactForm').addEventListener('submit',(e)=>{e.preventDefault();alert('Thank you!'); e.target.reset();});
-</script></body>
+/* Year */
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
     </html>
