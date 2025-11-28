@@ -18,6 +18,7 @@
   --bot-msg-bg: #f1f0f5;
   --user-msg-text: #fff;
   --bot-msg-text: #111;
+  --typing-color: #888;
 }[data-theme="dark"] {
 --bg-color: #0d0c21;
 --text-color: #f4f4f4;
@@ -32,6 +33,7 @@
 --bot-msg-bg: #222;
 --user-msg-text: #fff;
 --bot-msg-text: #eee;
+--typing-color: #aaa;
 }
 
 body {
@@ -116,6 +118,8 @@ padding: 12px 15px;
 border-radius: 20px;
 line-height: 1.4;
 word-wrap: break-word;
+opacity: 0;
+animation: fadeIn 0.3s forwards;
 }
 
 .message.user {
@@ -130,6 +134,22 @@ align-self: flex-start;
 background: var(--bot-msg-bg);
 color: var(--bot-msg-text);
 border-bottom-left-radius: 4px;
+}
+
+.message.typing::after {
+content: '...';
+display: inline-block;
+animation: blink 1s infinite;
+color: var(--typing-color);
+}
+
+@keyframes blink {
+0%, 50%, 100% { opacity: 1; }
+25%, 75% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+to { opacity: 1; }
 }
 
 #input-container {
@@ -234,12 +254,13 @@ const messages = document.getElementById('messages');
 const input = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
 
-function addMessage(sender, text){
+function addMessage(sender, text, typing=false){
   const div = document.createElement('div');
-  div.className = 'message ' + sender;
+  div.className = 'message ' + sender + (typing?' typing':'');
   div.textContent = text;
   messages.appendChild(div);
   messages.scrollTop = messages.scrollHeight;
+  return div;
 }
 
 async function sendMessageToAI(message){
@@ -263,15 +284,17 @@ async function handleMessage(){
   if(!text) return;
   addMessage('user', text);
   input.value = '';
-  addMessage('bot', 'Thinking...');
+  const typingDiv = addMessage('bot', 'Thinking...', true);
   const aiResponse = await sendMessageToAI(text);
-  messages.lastChild.remove();
+  typingDiv.remove();
   addMessage('bot', aiResponse);
 }
 
+// Send message on button click or enter
 sendBtn.addEventListener('click', handleMessage);
 input.addEventListener('keypress', (e)=>{ if(e.key==='Enter'){handleMessage();} });
 
+// Dark/light toggle
 document.getElementById('darkToggle').addEventListener('click', ()=>{
   const body = document.body;
   if(body.getAttribute('data-theme')==='light'){
@@ -283,8 +306,11 @@ document.getElementById('darkToggle').addEventListener('click', ()=>{
   }
 });
 
+// Default welcome message
+addMessage('bot', 'Hello! I am your Personal AI Agent. How can I help you today?');
+
 document.getElementById('year').textContent = new Date().getFullYear();
 document.getElementById('startBtn').addEventListener('click', ()=>window.open('https://forms.gle/', '_blank'));
 document.getElementById('contactForm').addEventListener('submit',(e)=>{e.preventDefault();alert('Thank you!'); e.target.reset();});
 </script></body>
-  </html>
+    </html>
