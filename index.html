@@ -2,28 +2,36 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Asfour's AI Chatbot Agency</title>
+<title>QOUTANICAL AI Chatbot</title>
 <style>
-  :root {
-    --bg-color: #e6e0f0;
-    --text-color: #111;
-    --header-bg: #1A183F;
-    --header-text: #fff;
-    --btn-bg: #8A2BE2;
-    --btn-hover: #0056b3;
-    --card-bg: #fff;
-    --chat-bg: #fff;
-    --chat-border: #ccc;
-  }[data-theme="dark"] {
+:root {
+  --bg-color: #e6e0f0;
+  --text-color: #111;
+  --header-bg: #1A183F;
+  --header-text: #fff;
+  --btn-bg: #8A2BE2;
+  --btn-hover: #7a1fcf;
+  --card-bg: #fff;
+  --chat-bg: #fff;
+  --chat-border: #ccc;
+  --user-msg-bg: #8A2BE2;
+  --bot-msg-bg: #f1f0f5;
+  --user-msg-text: #fff;
+  --bot-msg-text: #111;
+}[data-theme="dark"] {
 --bg-color: #0d0c21;
 --text-color: #f4f4f4;
 --header-bg: #1A183F;
 --header-text: #fff;
 --btn-bg: #8A2BE2;
---btn-hover: #1356a1;
+--btn-hover: #5c0f9c;
 --card-bg: #1e1e1e;
---chat-bg: #222;
---chat-border: #555;
+--chat-bg: #121024;
+--chat-border: #444;
+--user-msg-bg: #8A2BE2;
+--bot-msg-bg: #222;
+--user-msg-text: #fff;
+--bot-msg-text: #eee;
 }
 
 body {
@@ -34,7 +42,7 @@ color: var(--text-color);
 transition: background 0.3s, color 0.3s;
 }
 
-/* Header / Hero */
+/* Header */
 header {
 background: var(--header-bg);
 color: var(--header-text);
@@ -47,7 +55,6 @@ position: relative;
 display: flex;
 flex-direction: column;
 align-items: center;
-justify-content: center;
 gap: 15px;
 margin-bottom: 25px;
 }
@@ -57,23 +64,10 @@ width: 80px;
 height: 80px;
 border-radius: 12px;
 object-fit: cover;
-transition: transform 0.3s;
 }
 
-.logo-container img:hover {
-transform: rotate(15deg);
-}
-
-.logo-text h1 {
-margin: 0;
-font-size: 36px;
-}
-
-.logo-text p {
-margin: 5px 0 0;
-font-size: 18px;
-color: #ddd;
-}
+.logo-text h1 { margin: 0; font-size: 36px; }
+.logo-text p { margin: 5px 0 0; font-size: 18px; color: #ddd; }
 
 .btn {
 display: inline-block;
@@ -85,53 +79,87 @@ border-radius: 8px;
 font-size: 18px;
 transition: background 0.3s ease;
 }
-
 .btn:hover { background: var(--btn-hover); }
 
 /* Section styling */
 .section { padding: 50px 20px; text-align: center; }
-
 .pricing { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
-
 .card { background: var(--card-bg); padding:25px; border-radius:12px; width:280px; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
 .card:hover { transform: translateY(-10px); }
 
-/* Chatbox responsive */
+/* Chatbox ChatGPT style */
 .chatbox {
 width: 100%;
-max-width: 400px;
+max-width: 500px;
 margin: 40px auto;
 background: var(--chat-bg);
-border-radius: 12px;
-padding: 20px;
-box-sizing: border-box;
-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-transition: background 0.3s;
+border-radius: 15px;
+display: flex;
+flex-direction: column;
+box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+overflow: hidden;
 }
 
 #messages {
-height: 200px;
+flex: 1;
+padding: 15px;
+height: 400px;
 overflow-y: auto;
-text-align: left;
-padding: 10px;
-border: 1px solid var(--chat-border);
-border-radius: 8px;
-margin-bottom: 10px;
-box-sizing: border-box;
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.message {
+max-width: 75%;
+padding: 12px 15px;
+border-radius: 20px;
+line-height: 1.4;
+word-wrap: break-word;
+}
+
+.message.user {
+align-self: flex-end;
+background: var(--user-msg-bg);
+color: var(--user-msg-text);
+border-bottom-right-radius: 4px;
+}
+
+.message.bot {
+align-self: flex-start;
+background: var(--bot-msg-bg);
+color: var(--bot-msg-text);
+border-bottom-left-radius: 4px;
+}
+
+#input-container {
+display: flex;
+border-top: 1px solid var(--chat-border);
 }
 
 #userInput {
-width: 100%;
-padding: 10px;
-border-radius: 8px;
-border: 1px solid #999;
-box-sizing: border-box;
+flex: 1;
+padding: 12px 15px;
+border: none;
+outline: none;
+font-size: 16px;
+background: transparent;
+color: var(--text-color);
 }
 
-/* Footer */
-footer { text-align:center; padding:20px; color:#666; }
+#sendBtn {
+background: var(--btn-bg);
+border: none;
+color: white;
+padding: 0 20px;
+cursor: pointer;
+font-size: 18px;
+transition: background 0.3s;
+}
+#sendBtn:hover { background: var(--btn-hover); }
 
-/* Dark mode toggle */
+/* Footer & Dark Toggle */
+footer { text-align:center; padding:20px; color:#666; }
 .dark-toggle {
 position: absolute;
 top: 20px;
@@ -145,7 +173,6 @@ cursor: pointer;
 font-size: 18px;
 }
 
-/* Responsive adjustments */
 @media (min-width: 768px) {
 .logo-container { flex-direction: row; align-items: center; text-align: left; }
 .logo-text { margin-left: 20px; }
@@ -153,45 +180,36 @@ font-size: 18px;
 </style>
 
 </head>
-<body data-theme="light"><header>
+<body data-theme="light">
+<header>
   <button class="dark-toggle" id="darkToggle">🌙</button>
   <div class="logo-container">
-    <img src="AI-S.png" alt="Brand Personality Logo" id="logoImg" />
+    <img src="AI-S.png" alt="Brand Logo" />
     <div class="logo-text">
-      <h1 id="agencyName">QOUTANICAL AI</h1>
-      <p id="tagline">Our AI Solutions, Built Your Way. Enhance your business with our Intelligent AI Chatbots, tailored and customized to your exact needs.</p>
+      <h1>QOUTANICAL AI</h1>
+      <p>Our AI Solutions, built your way. Tailored AI chatbots for your business.</p>
     </div>
   </div>
   <a href="#get-started" class="btn">Get Started</a>
 </header><section class="section" id="demo">
   <h2>Try Our AI Chatbot</h2>
-  <div class="chatbox" role="region" aria-label="AI chatbot">
-    <div id="messages" aria-live="polite"></div>
-    <input id="userInput" placeholder="Type your message..." onkeypress="handleKey(event)" />
+  <div class="chatbox">
+    <div id="messages"></div>
+    <div id="input-container">
+      <input id="userInput" placeholder="Type your message..." />
+      <button id="sendBtn">➡️</button>
+    </div>
   </div>
-  <p style="max-width:700px; margin:0 auto;">Powered by OpenAI. Your AI assistant can answer questions about your business, services, and FAQs.</p>
-</section><section class="section" id="pricing">
+  <p style="max-width:700px;margin:0 auto;">Powered by OpenAI. Your AI assistant can answer questions about your business, services, and FAQs.</p>
+</section><!-- Pricing, Contact, Dashboard, Get Started sections (unchanged) --><section class="section" id="pricing">
   <h2>Pricing</h2>
-  <div class="pricing" role="list">
-    <div class="card" role="listitem">
-      <h3>Basic</h3>
-      <p><strong>300 SAR / month</strong></p>
-      <p>1 chatbot, basic support, 10k messages</p>
-    </div>
-    <div class="card" role="listitem">
-      <h3>Business</h3>
-      <p><strong>600 SAR / month</strong></p>
-      <p>Document training, analytics dashboard, website install</p>
-    </div>
-    <div class="card" role="listitem">
-      <h3>Premium</h3>
-      <p><strong>1200 SAR / month</strong></p>
-      <p>Multilingual, CRM integration, priority support</p>
-    </div>
+  <div class="pricing">
+    <div class="card"><h3>Basic</h3><p><strong>300 SAR / month</strong></p><p>1 chatbot, basic support, 10k messages</p></div>
+    <div class="card"><h3>Business</h3><p><strong>600 SAR / month</strong></p><p>Document training, analytics dashboard, website install</p></div>
+    <div class="card"><h3>Premium</h3><p><strong>1200 SAR / month</strong></p><p>Multilingual, CRM integration, priority support</p></div>
   </div>
 </section><section class="section" id="contact">
   <h2>Contact Us</h2>
-  <p>Have questions or want to work with us? Fill out the form below:</p>
   <form id="contactForm" style="max-width:400px;margin:0 auto;text-align:left;">
     <input type="text" name="name" placeholder="Name" required style="width:100%;padding:10px;margin:5px 0;border-radius:8px;">
     <input type="email" name="email" placeholder="Email" required style="width:100%;padding:10px;margin:5px 0;border-radius:8px;">
@@ -200,7 +218,6 @@ font-size: 18px;
   </form>
 </section><section class="section" id="dashboard">
   <h2>Dashboard Preview</h2>
-  <p>See analytics, chatbot performance, and user messages in one place.</p>
   <div class="card">
     <h3>Analytics Overview</h3>
     <p>Total Users: 120</p>
@@ -209,78 +226,65 @@ font-size: 18px;
   </div>
 </section><section class="section" id="get-started">
   <h2>Get Started</h2>
-  <p>Click below to begin onboarding your AI chatbot for your business.</p>
   <a href="#" class="btn" id="startBtn">Start Now</a>
 </section><footer>
-  <p>© <span id="year"></span> Bulbul AI Chatbot Agency — Built by Bulbul</p>
+  <p>© <span id="year"></span> QOUTANICAL AI — Built by Bulbul</p>
 </footer><script>
-  const messages = document.getElementById('messages');
+const messages = document.getElementById('messages');
+const input = document.getElementById('userInput');
+const sendBtn = document.getElementById('sendBtn');
 
-  async function sendMessageToAI(message) {
-    // Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI key
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer YOUR_OPENAI_API_KEY'
-      },
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: [{role:"user", content: message}]
-      })
-    });
-    const data = await response.json();
-    return data.choices[0].message.content;
-  }
+function addMessage(sender, text){
+  const div = document.createElement('div');
+  div.className = 'message ' + sender;
+  div.textContent = text;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
 
-  function addMessage(sender, text) {
-    const div = document.createElement('div');
-    div.style.margin = '6px 0';
-    div.innerHTML = '<b>' + sender + ':</b> ' + text;
-    messages.appendChild(div);
-    messages.scrollTop = messages.scrollHeight;
-  }
-
-  async function handleKey(e) {
-    if (e.key === 'Enter') {
-      const input = document.getElementById('userInput');
-      const text = input.value.trim();
-      if (!text) return;
-      addMessage('You', text);
-      input.value = '';
-      addMessage('Bot', 'Thinking...');
-      const aiResponse = await sendMessageToAI(text);
-      messages.lastChild.remove(); // remove 'Thinking...' placeholder
-      addMessage('Bot', aiResponse);
-    }
-  }
-
-  // Dark mode toggle
-  const darkToggle = document.getElementById('darkToggle');
-  darkToggle.addEventListener('click', () => {
-    const body = document.body;
-    if(body.getAttribute('data-theme') === 'light'){
-      body.setAttribute('data-theme','dark');
-      darkToggle.textContent = '☀️';
-    } else {
-      body.setAttribute('data-theme','light');
-      darkToggle.textContent = '🌙';
-    }
+async function sendMessageToAI(message){
+  const response = await fetch('https://api.openai.com/v1/chat/completions',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'Authorization':'Bearer YOUR_OPENAI_API_KEY'
+    },
+    body: JSON.stringify({
+      model: "gpt-3.5-turbo",
+      messages: [{role:"user", content: message}]
+    })
   });
+  const data = await response.json();
+  return data.choices[0].message.content;
+}
 
-  // Initialize
-  addMessage('Bot', 'Hello! Ask me anything about our services, pricing, or AI chatbot features.');
-  document.getElementById('year').textContent = new Date().getFullYear();
-  document.getElementById('startBtn').addEventListener('click', function(e){
-    e.preventDefault();
-    window.open('https://forms.gle/', '_blank'); // Placeholder
-  });
+async function handleMessage(){
+  const text = input.value.trim();
+  if(!text) return;
+  addMessage('user', text);
+  input.value = '';
+  addMessage('bot', 'Thinking...');
+  const aiResponse = await sendMessageToAI(text);
+  messages.lastChild.remove();
+  addMessage('bot', aiResponse);
+}
 
-  // Contact form
-  document.getElementById('contactForm').addEventListener('submit', (e)=>{
-    e.preventDefault();
-    alert('Thank you! Your message has been sent.');
-    e.target.reset();
-  });
+sendBtn.addEventListener('click', handleMessage);
+input.addEventListener('keypress', (e)=>{ if(e.key==='Enter'){handleMessage();} });
+
+document.getElementById('darkToggle').addEventListener('click', ()=>{
+  const body = document.body;
+  if(body.getAttribute('data-theme')==='light'){
+    body.setAttribute('data-theme','dark');
+    document.getElementById('darkToggle').textContent='☀️';
+  }else{
+    body.setAttribute('data-theme','light');
+    document.getElementById('darkToggle').textContent='🌙';
+  }
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('startBtn').addEventListener('click', ()=>window.open('https://forms.gle/', '_blank'));
+document.getElementById('contactForm').addEventListener('submit',(e)=>{e.preventDefault();alert('Thank you!'); e.target.reset();});
 </script></body>
-            </html>
+  </html>
